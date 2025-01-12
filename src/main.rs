@@ -1,11 +1,8 @@
 extern crate clap;
-#[macro_use]
-extern crate trackable;
 
-use async_std::net::TcpListener;
 use clap::{Parser, ValueEnum};
 use std::net::SocketAddr;
-use wstcp::{Error, ProxyServer};
+use wstcp::run_proxy;
 
 #[derive(Parser)]
 struct Args {
@@ -33,18 +30,4 @@ fn main() -> trackable::result::TopLevelResult {
   let tcp_server_addr = args.real_server_addr;
 
   async_std::task::block_on(run_proxy(bind_addr, tcp_server_addr))
-}
-
-pub async fn run_proxy(
-  bind_addr: SocketAddr,
-  tcp_server_addr: SocketAddr,
-) -> trackable::result::TopLevelResult {
-  let listener = track!(TcpListener::bind(bind_addr).await.map_err(Error::from))
-    .expect("failed to start listening on the given proxy address");
-
-  let proxy = ProxyServer::new(listener.incoming(), tcp_server_addr)
-    .await
-    .unwrap_or_else(|e| panic!("{}", e));
-  proxy.await.unwrap_or_else(|e| panic!("{}", e));
-  Ok(())
 }
