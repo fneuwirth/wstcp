@@ -1,5 +1,4 @@
-wstcp
-=====
+# wstcp
 
 [![wstcp](https://img.shields.io/crates/v/wstcp.svg)](https://crates.io/crates/wstcp)
 [![Documentation](https://docs.rs/wstcp/badge.svg)](https://docs.rs/wstcp)
@@ -8,8 +7,7 @@ wstcp
 
 WebSocket to TCP proxy written in Rust.
 
-Install
---------
+## Install
 
 ### Precompiled binaries
 
@@ -48,8 +46,7 @@ $ cargo install wstcp
 [cargo]: https://doc.rust-lang.org/cargo/
 [releases]: https://github.com/sile/wstcp/releases
 
-Examples
----------
+## Examples
 
 Run `wstcp` in a terminal:
 
@@ -73,8 +70,7 @@ $ ws ws://localhost:13892/
 
 After this, the "foo" string is displayed on the terminal running `nc`.
 
-References
-----------
+## References
 
 - [RFC 6455] The WebSocket Protocol
 
